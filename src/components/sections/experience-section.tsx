@@ -3,8 +3,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import dynamic from "next/dynamic";
 
-const Briefcase = dynamic(() => import("lucide-react").then((mod) => mod.Briefcase), { ssr: false });
-const Building2 = dynamic(() => import("lucide-react").then((mod) => mod.Building2), { ssr: false });
+const Briefcase = dynamic(() => import("lucide-react").then((mod) => mod.Briefcase));
+const Building2 = dynamic(() => import("lucide-react").then((mod) => mod.Building2));
 
 interface ExperienceItem {
   role: string;
