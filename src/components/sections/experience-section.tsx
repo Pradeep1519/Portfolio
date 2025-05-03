@@ -1,10 +1,6 @@
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import dynamic from "next/dynamic";
-
-const Briefcase = dynamic(() => import("lucide-react").then((mod) => mod.Briefcase));
-const Building2 = dynamic(() => import("lucide-react").then((mod) => mod.Building2));
 
 interface ExperienceItem {
   role: string;
@@ -38,7 +34,21 @@ export default function ExperienceSection() {
         {experienceData.map((exp, index) => (
           <div key={index} className="relative">
             <div className="absolute left-[-2.10rem] top-1 h-6 w-6 rounded-full flex items-center justify-center bg-primary ring-4 ring-primary/20">
-              <Briefcase className="w-4 h-4 text-white" />
+              {/* Replace with a static SVG */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 9l6 6 6-6"
+                />
+              </svg>
             </div>
             <div className="ml-8">
               <h3 className="text-xl font-semibold">{exp.role}</h3>
