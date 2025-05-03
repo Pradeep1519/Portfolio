@@ -7,6 +7,8 @@ import Image from "next/image";
 
 export default function AboutSection() {
   const [photoBackgroundAnimationData, setPhotoBackgroundAnimationData] = useState(null);
+  const [newBoyLeftAnimation, setNewBoyLeftAnimation] = useState(null);
+  const [newBoyRightAnimation, setNewBoyRightAnimation] = useState(null);
 
   useEffect(() => {
     // Fetch the Photo Background animation file
@@ -14,6 +16,20 @@ export default function AboutSection() {
       .then((response) => response.json())
       .then((data) => setPhotoBackgroundAnimationData(data))
       .catch((error) => console.error("Error loading Photo Background animation:", error));
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      fetch("/lottie/boy-waiting.json")
+        .then((res) => res.json())
+        .then((data) => setNewBoyLeftAnimation(data))
+        .catch((err) => console.error("Failed to load boy-waiting.json:", err));
+
+      fetch("/lottie/boy-speaking.json")
+        .then((res) => res.json())
+        .then((data) => setNewBoyRightAnimation(data))
+        .catch((err) => console.error("Failed to load boy-speaking.json:", err));
+    }
   }, []);
 
   return (

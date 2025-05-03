@@ -1,7 +1,14 @@
 "use client"; // Add this directive at the top
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Calendar } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const GraduationCap = dynamic(() =>
+  import("lucide-react").then((mod) => mod.GraduationCap)
+);
+const Calendar = dynamic(() =>
+  import("lucide-react").then((mod) => mod.Calendar)
+);
 
 export default function EducationSection() {
   return (

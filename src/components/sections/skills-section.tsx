@@ -77,6 +77,8 @@ const skillCategories = [
 
 export default function SkillsSection() {
   const [animationData, setAnimationData] = useState(null);
+  const [newBoyLeftAnimation, setNewBoyLeftAnimation] = useState(null);
+  const [newBoyRightAnimation, setNewBoyRightAnimation] = useState(null);
 
   // Load the Lottie JSON file asynchronously
   useEffect(() => {
@@ -84,6 +86,20 @@ export default function SkillsSection() {
       .then((res) => res.json())
       .then((data) => setAnimationData(data))
       .catch((err) => console.error("Failed to load Lottie animation:", err));
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      fetch("/lottie/boy-waiting.json")
+        .then((res) => res.json())
+        .then((data) => setNewBoyLeftAnimation(data))
+        .catch((err) => console.error("Failed to load boy-waiting.json:", err));
+
+      fetch("/lottie/boy-speaking.json")
+        .then((res) => res.json())
+        .then((data) => setNewBoyRightAnimation(data))
+        .catch((err) => console.error("Failed to load boy-speaking.json:", err));
+    }
   }, []);
 
   return (

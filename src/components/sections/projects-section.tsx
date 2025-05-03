@@ -83,6 +83,8 @@ export default function ProjectsSection() {
   const [heartDiseaseAnimationData, setHeartDiseaseAnimationData] = useState(null);
   const [callCenterAnimationData, setCallCenterAnimationData] = useState(null);
   const [salesAnalysisAnimationData, setSalesAnalysisAnimationData] = useState(null);
+  const [newBoyLeftAnimation, setNewBoyLeftAnimation] = useState(null);
+  const [newBoyRightAnimation, setNewBoyRightAnimation] = useState(null);
 
   useEffect(() => {
     // Fetch the Amazon Sale animation file
@@ -114,6 +116,18 @@ export default function ProjectsSection() {
       .then((response) => response.json())
       .then((data) => setSalesAnalysisAnimationData(data))
       .catch((error) => console.error("Error loading Sales Data Analysis animation:", error));
+
+    if (typeof window !== "undefined") {
+      fetch("/lottie/boy-waiting.json")
+        .then((res) => res.json())
+        .then((data) => setNewBoyLeftAnimation(data))
+        .catch((err) => console.error("Failed to load boy-waiting.json:", err));
+
+      fetch("/lottie/boy-speaking.json")
+        .then((res) => res.json())
+        .then((data) => setNewBoyRightAnimation(data))
+        .catch((err) => console.error("Failed to load boy-speaking.json:", err));
+    }
   }, []);
 
   return (

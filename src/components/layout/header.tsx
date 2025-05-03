@@ -32,35 +32,8 @@ export default function Header() {
   };
 
   if (!isMounted) {
-     // Render a placeholder or null during SSR / hydration mismatch phase
-     // to avoid layout shifts and hydration errors related to theme
-     return (
-        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-lg">Deep.</span>
-          </Link>
-           {/* Placeholder for Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-6">
-            <div className="h-6 w-12 bg-muted rounded-md animate-pulse"></div>
-            <div className="h-6 w-12 bg-muted rounded-md animate-pulse"></div>
-            <div className="h-6 w-12 bg-muted rounded-md animate-pulse"></div>
-            <div className="h-6 w-12 bg-muted rounded-md animate-pulse"></div>
-            <div className="h-6 w-12 bg-muted rounded-md animate-pulse"></div>
-            <div className="h-6 w-12 bg-muted rounded-md animate-pulse"></div>
-            <div className="h-9 w-24 bg-muted rounded-md animate-pulse"></div>
-            <div className="h-10 w-10 bg-muted rounded-full animate-pulse"></div>
-          </div>
-          {/* Placeholder for Mobile Nav Trigger */}
-          <div className="md:hidden flex items-center">
-            <div className="h-10 w-10 bg-muted rounded-md animate-pulse mr-2"></div>
-            <div className="h-10 w-10 bg-muted rounded-md animate-pulse"></div>
-          </div>
-        </div>
-      </header>
-     );
-   }
-
+    return null;
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-colors duration-300 ease-in-out"> {/* Faster transition */}

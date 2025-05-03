@@ -5,7 +5,6 @@ import { Download } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import Lottie from "react-lottie-player";
-import VanillaTilt from "vanilla-tilt";
 
 export default function HeroSection() {
   const [animationData, setAnimationData] = useState(null); // State to hold animation data
@@ -44,14 +43,16 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
-    if (tiltRef.current) {
-      VanillaTilt.init(tiltRef.current, {
-        max: 25,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.5,
-      });
-    }
+    import("vanilla-tilt").then((VanillaTilt) => {
+      if (tiltRef.current) {
+        VanillaTilt.init(tiltRef.current, {
+          max: 25,
+          speed: 400,
+          glare: true,
+          "max-glare": 0.5,
+        });
+      }
+    });
   }, []);
 
   return (

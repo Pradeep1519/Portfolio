@@ -19,6 +19,14 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import Link from 'next/link';
+import dynamic from "next/dynamic";
+
+const GraduationCap = dynamic(() =>
+  import("lucide-react").then((mod) => mod.GraduationCap)
+);
+const Calendar = dynamic(() =>
+  import("lucide-react").then((mod) => mod.Calendar)
+);
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -52,23 +60,13 @@ export default function ContactSection() {
     },
   });
 
-  const handleSubmit = async (values) => {
-    const scriptUrl = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL;
-
-    if (!scriptUrl) {
-      console.error("Google Apps Script URL is not defined.");
-      toast({
-        title: "Configuration Error",
-        description: "The form submission endpoint is not configured.",
-        variant: "destructive",
-      });
-      return;
-    }
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    const proxyUrl = "http://localhost:5000/proxy";
 
     try {
       setIsSubmitting(true);
 
-      const response = await fetch(scriptUrl, {
+      const response = await fetch(proxyUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +84,7 @@ export default function ContactSection() {
       toast({
         title: "Success",
         description: "Your message has been sent successfully!",
-        variant: "success",
+        variant: "default",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
