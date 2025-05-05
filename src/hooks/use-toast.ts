@@ -1,4 +1,3 @@
-
 "use client"
 
 // Inspired by react-hot-toast library
@@ -201,24 +200,23 @@ function toast({ ...props }: Toast) {
   }
 }
 
-function useToast() {
-  const [state, setState] = React.useState<State>(memoryState)
+export function useToast() {
+  const [state, setState] = React.useState<State>(memoryState);
 
   React.useEffect(() => {
-    listeners.push(setState)
+    const listener = (newState: State) => setState(newState);
+    listeners.push(listener);
     return () => {
-      const index = listeners.indexOf(setState)
-      if (index > -1) {
-        listeners.splice(index, 1)
-      }
-    }
-  }, [state])
+      const index = listeners.indexOf(listener);
+      if (index > -1) listeners.splice(index, 1);
+    };
+  }, []);
 
   return {
-    ...state,
-    toast,
-    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
-  }
+    toasts: state.toasts,
+    addToast: (toast: Toast) => dispatch({ type: "ADD_TOAST", toast }),
+    removeToast: (toastId: string) => dispatch({ type: "REMOVE_TOAST", toastId }),
+  };
 }
 
-export { useToast, toast }
+export { toast }

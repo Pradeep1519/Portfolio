@@ -9,15 +9,17 @@ export default function TestimonialsSection() {
 
   // Load the new Lottie JSON files asynchronously
   useEffect(() => {
-    fetch("/lottie/boy-waiting.json")
-      .then((res) => res.json())
-      .then((data) => setNewBoyLeftAnimation(data))
-      .catch((err) => console.error("Failed to load boy-waiting.json:", err));
+    if (typeof window !== "undefined") {
+      fetch("/lottie/boy-waiting.json")
+        .then((res) => res.json())
+        .then((data) => setNewBoyLeftAnimation(data))
+        .catch((err) => console.error("Failed to load boy-waiting.json:", err));
 
-    fetch("/lottie/boy-speaking.json")
-      .then((res) => res.json())
-      .then((data) => setNewBoyRightAnimation(data))
-      .catch((err) => console.error("Failed to load boy-speaking.json:", err));
+      fetch("/lottie/boy-speaking.json")
+        .then((res) => res.json())
+        .then((data) => setNewBoyRightAnimation(data))
+        .catch((err) => console.error("Failed to load boy-speaking.json:", err));
+    }
   }, []);
 
   return (

@@ -47,7 +47,7 @@ const formSchema = z.object({
 const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || '';
 
 export default function ContactSection() {
-  const { toast } = useToast();
+  const { addToast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -61,7 +61,7 @@ export default function ContactSection() {
   });
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    const proxyUrl = "http://localhost:5000/proxy";
+    const proxyUrl = "https://script.google.com/macros/s/AKfycbwi5-gl3R7uri2tkcNsRT_5PhvOlNj2wGYlj816K7VrwmXfM7dU0l_g_2CoON-z9vtrOA/exec";
 
     try {
       setIsSubmitting(true);
@@ -81,14 +81,14 @@ export default function ContactSection() {
       const result = await response.json();
       console.log("Form submitted successfully:", result);
 
-      toast({
+      addToast({
         title: "Success",
         description: "Your message has been sent successfully!",
         variant: "default",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast({
+      addToast({
         title: "Submission Failed",
         description: "Failed to send your message. Please try again later.",
         variant: "destructive",

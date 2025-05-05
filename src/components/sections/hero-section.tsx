@@ -13,46 +13,55 @@ export default function HeroSection() {
   const [scrollOpacity, setScrollOpacity] = useState(1); // State for scroll button opacity
   const tiltRef = useRef(null);
 
+  // Fetch Lottie animation data
   useEffect(() => {
-    // Fetch the animation file from the public folder
-    fetch("/lottie/hero-background.json")
-      .then((response) => response.json())
-      .then((data) => setAnimationData(data))
-      .catch((error) => console.error("Error loading animation:", error));
+    if (typeof window !== "undefined") {
+      fetch("/lottie/hero-background.json")
+        .then((response) => response.json())
+        .then((data) => setAnimationData(data))
+        .catch((error) => console.error("Error loading animation:", error));
+    }
   }, []);
 
+  // Rotate roles every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRole((prevRole) =>
         roles[(roles.indexOf(prevRole) + 1) % roles.length]
       );
-    }, 3000); // Change role every 3 seconds
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
+  // Handle scroll opacity
   useEffect(() => {
-    const handleScroll = () => {
-      const maxScroll = 100; // Maximum scroll position for full opacity fade-out
-      const currentScroll = window.scrollY;
-      const opacity = Math.max(0, 1 - currentScroll / maxScroll); // Calculate opacity
-      setScrollOpacity(opacity);
-    };
+    if (typeof window !== "undefined") {
+      const handleScroll = () => {
+        const maxScroll = 100; // Maximum scroll position for full opacity fade-out
+        const currentScroll = window.scrollY;
+        const opacity = Math.max(0, 1 - currentScroll / maxScroll); // Calculate opacity
+        setScrollOpacity(opacity);
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
+  // Initialize VanillaTilt
   useEffect(() => {
-    import("vanilla-tilt").then((VanillaTilt) => {
-      if (tiltRef.current) {
-        VanillaTilt.init(tiltRef.current, {
-          max: 25,
-          speed: 400,
-          glare: true,
-          "max-glare": 0.5,
-        });
-      }
-    });
+    if (typeof window !== "undefined") {
+      import("vanilla-tilt").then((VanillaTilt) => {
+        if (tiltRef.current) {
+          VanillaTilt.default.init(tiltRef.current, {
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.5,
+          });
+        }
+      });
+    }
   }, []);
 
   return (

@@ -208,6 +208,9 @@
     /* Gradient Text */
     .gradient-text {
       background: linear-gradient(to right, #ff7eb3, #ff758c, #ff6a65);
+      background-clip: text;
+      background-clip: text;
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -275,7 +278,7 @@
 
 /* Gradient Text Animation */
 .gradient-text {
-  background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff6a6a);
+  background: linear-gradient(to right, #ff7eb3, #ff758c, #ff6a6a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
