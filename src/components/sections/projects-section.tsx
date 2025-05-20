@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import Lottie from "react-lottie-player";
+import dynamic from "next/dynamic"; 
+
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 const projectsData = [
   {

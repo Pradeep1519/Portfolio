@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BrainCircuit, Database, BarChart3, Activity, Layers3, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import Lottie from "react-lottie-player";
+import dynamic from "next/dynamic"; 
+
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 // Updated Skill interface
 interface Skill {

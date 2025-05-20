@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Lottie from "react-lottie-player";
+import dynamic from "next/dynamic"; 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+
+
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 export default function AboutSection() {
   const [photoBackgroundAnimationData, setPhotoBackgroundAnimationData] = useState(null);
   const [newBoyLeftAnimation, setNewBoyLeftAnimation] = useState(null);
-  const [newBoyRightAnimation, setNewBoyRightAnimation] = useState(null);
+  const [newBoyRightAnimation, setNewBoyRightAnimationData] = useState(null);
 
   useEffect(() => {
     // Fetch the Photo Background animation file
@@ -19,6 +22,7 @@ export default function AboutSection() {
   }, []);
 
   useEffect(() => {
+    // Ensure code runs only on client
     if (typeof window !== "undefined") {
       fetch("/lottie/boy-waiting.json")
         .then((res) => res.json())
@@ -27,7 +31,7 @@ export default function AboutSection() {
 
       fetch("/lottie/boy-speaking.json")
         .then((res) => res.json())
-        .then((data) => setNewBoyRightAnimation(data))
+        .then((data) => setNewBoyRightAnimationData(data))
         .catch((err) => console.error("Failed to load boy-speaking.json:", err));
     }
   }, []);
@@ -52,7 +56,7 @@ export default function AboutSection() {
             )}
             {/* Photo */}
             <Image
-              src="/images/photo.jpg" // Corrected path
+              src="/images/photo.jpg"
               alt="Pradeep Kumar"
               width={350}
               height={350}

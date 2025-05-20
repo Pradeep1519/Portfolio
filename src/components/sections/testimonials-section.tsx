@@ -1,7 +1,9 @@
 "use client"; // Add this directive at the top
 
 import { useEffect, useState } from "react";
-import Lottie from "react-lottie-player";
+import dynamic from "next/dynamic"; 
+
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 export default function TestimonialsSection() {
   const [newBoyLeftAnimation, setNewBoyLeftAnimation] = useState(null);
