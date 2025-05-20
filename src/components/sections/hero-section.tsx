@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import Lottie from "react-lottie-player";
+// import Lottie from "react-lottie-player";
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
+
 
 export default function HeroSection() {
   const [animationData, setAnimationData] = useState(null); // State to hold animation data
